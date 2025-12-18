@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Поиск университетов</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+
+<header>Университетский портал</header>
+
+<nav>
+    <a href="/">Главная</a>
+    <a href="/admin_auth">Админ</a>
+</nav>
+
+<main>
+
+    <div class="search-panel">
+        <div class="uni_find"><h1>Поиск университетов</h1></div>
+
+        <div class="country-switch">
+            <label class="switch">
+                <input type="checkbox" id="country-toggle">
+                <span class="slider"></span>
+            </label>
+            <span id="country-label">КНР</span>
+        </div>
+
+        <form id="search-form">
+
+            <div class="dropdown-block">
+                <div class="dropdown-header">
+                    <span class="label subjects-label">Предметы</span>
+                    <button class="btn-dropdown subjects-btn">▼</button>
+                </div>
+                <ul class="dropdown-list subject-list hidden">
+                    <li><label><input type="checkbox" value="Биология"> Биология</label></li>
+                    <li><label><input type="checkbox" value="География"> География</label></li>
+                    <li><label><input type="checkbox" value="История"> История</label></li>
+                    <li><label><input type="checkbox" value="Информатика и ИКТ"> Информатика и ИКТ</label></li>
+                    <li><label><input type="checkbox" value="Иностранный язык"> Иностранный язык</label></li>
+                    <li><label><input type="checkbox" value="Литература"> Литература</label></li>
+                    <li><label><input type="checkbox" value="Обществознание"> Обществознание</label></li>
+                    <li><label><input type="checkbox" value="Русский язык"> Русский язык</label></li>
+                    <li><label><input type="checkbox" value="Профильная математика"> Профильная математика</label></li>
+                    <li><label><input type="checkbox" value="Физика"> Физика</label></li>
+                    <li><label><input type="checkbox" value="Химия"> Химия</label></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-block">
+                <div class="dropdown-header">
+                    <span class="label cities-label">Города</span>
+                    <button class="btn-dropdown cities-btn">▼</button>
+                </div>
+                <ul class="dropdown-list cities-list hidden"></ul>
+            </div>
+
+            <button type="submit" class="btn-search">Искать</button>
+
+        </form>
+
+        <div class="error-box" id="error-box"></div>
+    </div>
+
+    <div class="results-panel">
+        <h2>Результаты поиска</h2>
+        <div id="results"></div>
+    </div>
+
+    <div class="theme-switch">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
+        <span id="theme-label">Тема</span>
+    </div>
+
+</main>
+
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

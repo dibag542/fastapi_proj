@@ -1,0 +1,105 @@
+body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            width: 360px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #8a3bd3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #6c2da5;
+        }
+
+        .error {
+            background: #ffe5e5;
+            padding: 10px;
+            border: 1px solid red;
+            color: #b30000;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+@media screen and (max-width: 600px) {
+    .login-box {
+        width: 300px;
+        padding: 35px;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .login-box {
+        width: 450px;
+        padding: 45px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    input, button {
+        font-size: 18px;
+    }
+
+    label{
+        font-size: 18px;
+    }
+}
+
+/* Экранные устройства шире 900 пикселей (больших экраны, компьютеры) */
+@media screen and (min-width: 900px) {
+    .login-box {
+        width: 700px;
+        padding: 50px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    input, button {
+        font-size: 24px;
+    }
+
+    label{
+        font-size: 22px;
+    }
+}
