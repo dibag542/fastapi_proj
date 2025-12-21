@@ -8,8 +8,8 @@ async def password_check(
     password: str | None = Query(None),
     login: str | None = Query(None),
 ):
-    ADMIN_PASSWORD = "123"  
-    LOGIN = "123"
+    ADMIN_PASSWORD = "987"
+    LOGIN = "987"
     if not password or not login:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Нужны параметры password и login")
 
