@@ -25,11 +25,10 @@ async def get_university(
         cities: Optional[List[str]] = None
 ):
     """
-    Сервисная функция для поиска университетов и программ по заданным критериям.
-    Возвращает удобный для пользователя результат с расшифрованными предметами.
+    Функция для поиска университетов и программ по заданным критериям.
+
     """
     try:
-        # Начинаем построение основного SQL-запроса
         stmt = select(UniversityDB).options(selectinload(UniversityDB.programs))
 
         # Фильтрация по городам
@@ -71,7 +70,7 @@ async def get_university(
                     "programs": []
                 }
 
-            # Конвертируем маски в удобочитаемые списки предметов
+            # Конвертируем маски в списки предметов
             required_all_names = ", ".join(mask_to_subjects(program.mask_required_all))
             required_any_names = ", ".join(mask_to_subjects(program.mask_required_any))
 
@@ -90,6 +89,10 @@ async def get_university(
         raise
 
 async def add_university(db: AsyncSession, name: str, cities: Optional[List[str]] = None):
+    """
+    Функция для добавления университета.
+
+    """
     try:
         db_university = UniversityDB(name=name, cities=cities or [])
         db.add(db_university)
@@ -102,6 +105,10 @@ async def add_university(db: AsyncSession, name: str, cities: Optional[List[str]
         raise
 
 async def delete_university(db: AsyncSession, university_id: int):
+    """
+    Функция для удаления университета.
+
+    """
     try:
         stmt = delete(UniversityDB).where(UniversityDB.id == university_id)
         result = await db.execute(stmt)
@@ -116,6 +123,10 @@ async def update_university(db: AsyncSession,
                             university_id: int,
                             name: Optional[str] = None,
                             cities: Optional[List[str]] = None):
+    """
+    Функция для редактирования университета.
+
+    """
     try:
         stmt = (
             select(UniversityDB)
@@ -151,10 +162,6 @@ async def get_university_by_id(db: AsyncSession, university_id: int):
     except Exception as e:
         logger.error(f"Ошибка в get_university_by_id: {e}", exc_info=True)
         raise
-
-# Функции для программ
-
-from sqlalchemy.ext.asyncio import AsyncSession
 
 
 # Битовые маски для предметов
@@ -194,8 +201,11 @@ async def add_program(
     program_url: str,
     university_id: int
 ):
+    """
+    Функция для добавления программы.
+
+    """
     try:
-        # Создаем новую программу
         db_program = ProgramDB(
             name=name,
             mask_required_all=required_all,
@@ -212,12 +222,16 @@ async def add_program(
         logger.error(f"Ошибка в add_program: {e}", exc_info=True)
         raise
 
-# ---- Получить все программы ----
+
 async def get_programs(db: AsyncSession):
+    """
+    Функция для получения всех программ.
+
+    """
     result = await db.execute(select(ProgramDB))
     return result.scalars().all()
 
-# ---- Обновить программу ----
+
 async def update_program(
     db: AsyncSession,
     program_id: int,
@@ -226,6 +240,10 @@ async def update_program(
     program_url: Optional[str] = None,
     university_id: Optional[int] = None
 ):
+    """
+    Функция для редактирования программы.
+
+    """
     try:
         stmt = update(ProgramDB).where(ProgramDB.id == program_id)
         values = {}
@@ -248,8 +266,12 @@ async def update_program(
         logger.error(f"Ошибка в update_program: {e}", exc_info=True)
         raise
 
-# ---- Удалить программу ----
+
 async def delete_program(db: AsyncSession, program_id: int):
+    """
+    Функция для удаления программы.
+
+    """
     try:
         stmt = delete(ProgramDB).where(ProgramDB.id == program_id)
         result = await db.execute(stmt)
@@ -260,8 +282,12 @@ async def delete_program(db: AsyncSession, program_id: int):
         logger.error(f"Ошибка в delete_program: {e}", exc_info=True)
         raise
 
-# ---- Фильтр по маске ----
+
 async def filter_programs(db: AsyncSession, user_mask: int):
+    """
+    Функция для фильтрации программ.
+
+    """
     try:
         query = select(ProgramDB).where(
             and_(
