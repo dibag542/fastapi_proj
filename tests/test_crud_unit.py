@@ -7,7 +7,6 @@ from uniapp.models import UniversityDB, ProgramDB
 
 @pytest.mark.asyncio
 async def test_add_university_returns_object(fake_db):
-    # ensure commit/refresh do not raise
     result = await crud.add_university(fake_db, "Test Uni", ["City1"])
     assert isinstance(result, UniversityDB)
     assert result.name == "Test Uni"
@@ -59,7 +58,6 @@ async def test_filter_programs_filters_by_mask(fake_db):
 
 @pytest.mark.asyncio
 async def test_update_program_returns_none_when_no_values(fake_db):
-    # passing no updatable values
     res = await crud.update_program(fake_db, program_id=1)
     assert res is None
 

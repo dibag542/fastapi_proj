@@ -32,7 +32,6 @@ class FakeResult:
 
 class FakeAsyncSession:
     def __init__(self):
-        # default behavior: no rows
         self._next_result = FakeResult([])
 
     def set_next_result(self, items: List[Any] | Any, rowcount: int = 0):
@@ -62,7 +61,6 @@ def fake_db():
 
 @pytest.fixture
 def client(fake_db):
-    # override DB dependency to use fake session (sync override is OK)
     def _override_get_session():
         yield fake_db
 
