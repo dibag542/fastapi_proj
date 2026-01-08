@@ -10,6 +10,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 async def get_universities(db: AsyncSession, skip: int = 0, limit: int = 100):
+    """
+    Функция для получения всех университетов.
+
+    """
     try:
         stmt = select(UniversityDB).options(selectinload(UniversityDB.programs)).offset(skip).limit(limit)
         result = await db.execute(stmt)

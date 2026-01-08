@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query, HTTPException, status
 from urllib.parse import urlparse, parse_qs
 import re
 
-router = APIRouter()  # ← именно router, а не функция
+router = APIRouter()
 @router.get("/password_check")
 async def password_check(
     password: str | None = Query(None),

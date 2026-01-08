@@ -8,7 +8,7 @@ from uniapp.database import get_session
 from uniapp.models import UniversityDB, ProgramDB, SubjectsDB
 from uniapp.schemas import SearchUniversitiesRequest
 
-router = APIRouter()  # ← именно router, а не функция
+router = APIRouter()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,6 @@ async def search_universities(request: SearchUniversitiesRequest, session: Async
     Роутер для поиска университетов и программ по заданным критериям.
     """
     logger.debug(f"Received request: {request.dict()}")
-    # Получаем результаты через CRUD-функцию
     results = await get_university(session, subjects=request.subjects, cities=request.cities)
     return results
 
@@ -28,6 +27,9 @@ async def search_universities(request: SearchUniversitiesRequest, session: Async
 async def api_get_all_universities(
     session: AsyncSession = Depends(get_session)
 ):
+    """
+    Роутер для получения всех университетов.
+    """
     universities = await get_universities(session)
     return [
         {
@@ -44,6 +46,9 @@ async def api_add_university(
     cities: list[str] | None = Body(None),
     session: AsyncSession = Depends(get_session)
 ):
+    """
+    Роутер для добавления университета.
+    """
     from uniapp.crud import add_university
 
     university = await add_university(session, name, cities)
@@ -59,6 +64,9 @@ async def api_delete_university(
     university_id: int,
     session: AsyncSession = Depends(get_session)
 ):
+    """
+    Роутер для удаления университета.
+    """
     from uniapp.crud import delete_university
 
     deleted = await delete_university(session, university_id)
@@ -73,6 +81,9 @@ async def api_update_university(
     cities: list[str] | None = Body(None),
     session: AsyncSession = Depends(get_session)
 ):
+    """
+    Роутер для редактирования университета.
+    """
     from uniapp.crud import update_university
 
     university = await update_university(session, university_id, name, cities)
