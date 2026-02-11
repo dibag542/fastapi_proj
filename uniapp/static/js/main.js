@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("#search-form");
     const resultsContainer = document.querySelector("#results");
-    const subjectsbtn = document.querySelector('.subjects-btn');
-    const citiesbtn = document.querySelector('.cities-btn');
+    const subjectsBtn = document.querySelector('.subjects-btn');
+    const citiesBtn = document.querySelector('.cities-btn');
     const errorBox = document.querySelector("#error-box");
     const citiesList = document.querySelector(".cities-list");
+    const subjectsList = document.querySelector(".subject-list");
     const citiesLabel = document.querySelector(".cities-label");
+    const citiesHeader = document.querySelector(".cities-header");
+    const subjectsHeader = document.querySelector(".subjects-header");
     const countryToggle = document.querySelector("#country-toggle");
     const countryLabel = document.querySelector("#country-label");
 
@@ -37,22 +40,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return subjects;
 }
     function toggleArrowSubj() {
-        if (subjectsbtn.textContent === '▼') {
-            subjectsbtn.textContent = '▲'; // Меняем направление стрелочки вверх
+        if (subjectsBtn.textContent === '▼') {
+            subjectsBtn.textContent = '▲'; // Меняем направление стрелочки вверх
         } else {
-            subjectsbtn.textContent = '▼'; // Возвращаемся обратно
+            subjectsBtn.textContent = '▼'; // Возвращаемся обратно
         }
     }
-    subjectsbtn.addEventListener('click', toggleArrowSubj);
+    subjectsHeader.addEventListener('click', toggleArrowSubj);
+
 
     function toggleArrowCities() {
-        if (citiesbtn.textContent === '▼') {
-            citiesbtn.textContent = '▲'; // Меняем направление стрелочки вверх
+        if (citiesBtn.textContent === '▼') {
+            citiesBtn.textContent = '▲'; // Меняем направление стрелочки вверх
         } else {
-            citiesbtn.textContent = '▼'; // Возвращаемся обратно
+            citiesBtn.textContent = '▼'; // Возвращаемся обратно
         }
     }
-    citiesbtn.addEventListener('click', toggleArrowCities);
+    citiesHeader.addEventListener('click', toggleArrowCities);
 
     function renderCities(country) {
         citiesList.innerHTML = "";
@@ -88,16 +92,16 @@ document.addEventListener("DOMContentLoaded", () => {
         countryLabel.textContent = country;
         renderCities(country);
     });
-
-    document.querySelector(".subjects-btn")?.addEventListener("click", (e) => {
-        e.preventDefault();
-        document.querySelector(".subject-list")?.classList.toggle("hidden");
-    });
-
-    document.querySelector(".cities-btn")?.addEventListener("click", (e) => {
+    citiesHeader.addEventListener("click", (e) => {
         e.preventDefault();
         citiesList.classList.toggle("hidden");
-    });
+        });
+
+    subjectsHeader.addEventListener("click", (e) => {
+        e.preventDefault();
+        subjectsList.classList.toggle("hidden");
+        });
+
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault(); // предотвращаем перезагрузку страницы
